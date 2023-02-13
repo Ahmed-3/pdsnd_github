@@ -171,6 +171,24 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*50)
 
+def display_raw_data(df):
+    user_input = input('Would you like to see more data? (Enter:Yes/No).\n')
+
+    while user_input.lower() not in ['yes','no']:
+        user_input = input('Please Enter Yes or No:\n')
+        user_input = user_input.lower()
+
+    n = 0
+    while True:
+        if user_input == 'yes':
+            print(df.iloc[n : n + 5])
+            n += 5
+            user_input = input('Would you like to see more data? (Enter:Yes/No).\n')
+            while user_input.lower() not in ['yes','no']:
+                user_input = input('Please Enter Yes or No:\n')
+                user_input = user_input.lower() 
+        else:
+            break
 
 def main():
     while True:
@@ -181,24 +199,6 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
-        user_input = input('Would you like to see more data? (Enter:Yes/No).\n')
-        while user_input.lower() not in ['yes','no']:
-            user_input = input('Please Enter Yes or No:\n')
-            user_input = user_input.lower()
-
-        n = 0
-        while True:
-            if user_input == 'yes':
-                print(df.iloc[n : n + 5])
-                n += 5
-                user_input = input('Would you like to see more data? (Enter:Yes/No).\n')
-                while user_input.lower() not in ['yes','no']:
-                    user_input = input('Please Enter Yes or No:\n')
-                    user_input = user_input.lower() 
-            else:
-                break
-
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
